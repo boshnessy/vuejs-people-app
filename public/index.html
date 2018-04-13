@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My App</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.js"></script>
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <div id="vue-app">
+
+    <router-view></router-view>
+
+  </div>
+</body>
+</html>
+
+<template id="home-page">
+  <div class="vue-component">
+
+    <h1>{{ message }}</h1>
+    <h3 id="counter">Counter</h3>
+    <div v-for="person in people">
+      {{ person.name}} {{ person.bio }}; {{ person.bioVisible }}
+    <button v-on:click="deletePerson()">Delete person</button>
+    </div>
+    <p>name: <input v-model="newPerson.name"></p>
+    <p>bio: <input v-model="newPerson.bio"></p>
+    <button v-on:click="addPerson()">Add person</button>
+    <button v-on:click="countPeople()">Count people</button>
+
+  </div>
+</template>
