@@ -22,7 +22,7 @@ var HomePage = {
           bioVisible: true
         }
       ],
-      newPerson: {name: "", bio: "", bioVisible: ""}
+      newPerson: {name: "", bio: "", bioVisible: true}
     };
   },
   created: function() {},
@@ -30,16 +30,21 @@ var HomePage = {
     addPerson: function() {
       console.log("adding a person");
       this.people.push(this.newPerson);
+      this.newPerson = "";
     },
-    countPeople: function() {
-      console.log("counting people");
-      var counter = document.querySelectorAll("#counter");
-      counter.innerText = this.people.length;
-    },
-    deletePerson: function(thePerson) {
-      console.log("deleting person");
-      var index = this.people.indexOf(thePerson);
+    deletePerson: function(person) {
+      console.log(person);
+      var index = this.people.indexOf(person);
+      console.log(index);
       this.people.splice(index, 1);
+    },
+    toggleBioVisible: function(person) {
+      // if (person.bioVisible === true) {
+      //   person.bioVisible = false;
+      // } else {
+      //   person.bioVisible = true;
+      // }
+      person.bioVisible = !person.bioVisible;
     }
   },
   computed: {}

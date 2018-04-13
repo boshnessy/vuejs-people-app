@@ -21,15 +21,17 @@
   <div class="vue-component">
 
     <h1>{{ message }}</h1>
-    <h3 id="counter">Counter</h3>
+    <h2># of people: {{ people.length }}</h2>
+
     <div v-for="person in people">
-      {{ person.name}} {{ person.bio }}; {{ person.bioVisible }}
-    <button v-on:click="deletePerson()">Delete person</button>
+      <h4 v-on:click="toggleBioVisible(person)">{{ person.name }}</h4>
+      <p v-if="person.bioVisible">{{ person.bio }}</p>
+    <button v-on:click="deletePerson(person)">Delete person</button>
     </div>
+
     <p>name: <input v-model="newPerson.name"></p>
     <p>bio: <input v-model="newPerson.bio"></p>
     <button v-on:click="addPerson()">Add person</button>
-    <button v-on:click="countPeople()">Count people</button>
 
   </div>
 </template>
