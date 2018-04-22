@@ -8,6 +8,7 @@ var HomePage = {
       searchName: "",
       searchBio: "",
       sortAttribute: "name",
+      sortAsc: true,
       people: [],
       newPerson: {name: "", bio: "", bioVisible: true}
     };
@@ -50,15 +51,19 @@ var HomePage = {
       return validBio && validName;
     },
     setSortAttribute: function(inputAttribute) {
-      this.sortAttribute = inputAttribute;
+      this.sortAsc = !this.sortAsc;
     }
   },
   computed: {
     sortedPeople: function() {
       return this.people.sort(function(person1, person2) {
-        var person1Name = person1[this.sortAttribute].toLowerCase();
-        var person2Name = person2[this.sortAttribute].toLowerCase();
-        return person1Name.localeCompare(person2Name);
+        var person1Attribute = person1[this.sortAttribute].toLowerCase();
+        var person2Attribute = person2[this.sortAttribute].toLowerCase();
+        if (this.sortAsc) {
+          return person1Attribute.localeCompare(person2Attribute);
+        } else {
+          return person2Attribute.localeCompare(person1Attribute);
+        }
       }.bind(this));
     }
   }
