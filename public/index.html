@@ -28,9 +28,10 @@
       <option v-for="person in people">{{ person.name }}</option>
     </datalist>
     <p>Search for bio:<input v-model="searchBio"></p>
+    <p><button v-on:click="setSortAttribute('name')">Sort by name</button><button v-on:click="setSortAttribute('bio')">Sort by bio</button></p>
 
     <transition-group name="slide-right">
-      <div v-for="person in people" v-if="isValidPerson(person)" v-bind:key="person.id">
+      <div v-for="person in sortedPeople" v-if="isValidPerson(person)" v-bind:key="person.id">
         <h4 v-on:click="toggleBioVisible(person)">{{ person.name }}</h4>
         <!-- <p v-if="person.bioVisible">{{ person.bio }}</p> -->
         <p v-bind:class="{strike: person.bioVisible}">{{ person.bio }}</p>
