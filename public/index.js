@@ -5,6 +5,8 @@ var HomePage = {
   data: function() {
     return {
       message: "Welcome to Vue.js!",
+      searchName: "",
+      searchBio: "",
       people: [
         {
           name: "Bob",
@@ -45,6 +47,12 @@ var HomePage = {
       //   person.bioVisible = true;
       // }
       person.bioVisible = !person.bioVisible;
+    },
+    isValidPerson: function(inputPerson) {
+      console.log("running isValidPerson");
+      var validBio = inputPerson.bio.toLowerCase().includes(this.searchBio.toLowerCase());
+      var validName = inputPerson.name.toLowerCase().includes(this.searchName.toLowerCase());
+      return validBio && validName;
     }
   },
   computed: {}
