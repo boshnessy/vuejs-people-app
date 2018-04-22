@@ -10,5 +10,10 @@ class PeopleController < ApplicationController
       bio: params[:bio],
       bioVisible: true
     )
+    if person.save
+      render json: person.as_json
+    else
+      render json: {errors: person.errors.full_messages}
+    end
   end
 end

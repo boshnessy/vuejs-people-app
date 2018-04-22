@@ -19,9 +19,15 @@ var HomePage = {
   },
   methods: {
     addPerson: function() {
-      console.log("adding a person");
-      this.people.push(this.newPerson);
-      this.newPerson = "";
+      var params = {
+        name: this.newPerson.name,
+        bio: this.newPerson.bio
+      };
+      axios.post("/people", params).then(function(response) {
+        console.log("adding a person");
+        this.people.push(response.data);
+        this.newPerson = "";
+      }.bind(this));
     },
     deletePerson: function(person) {
       console.log(person);
