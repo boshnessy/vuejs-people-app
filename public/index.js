@@ -7,27 +7,15 @@ var HomePage = {
       message: "Welcome to Vue.js!",
       searchName: "",
       searchBio: "",
-      people: [
-        {
-          name: "Bob",
-          bio: "is an architect",
-          bioVisible: true
-        },
-        {
-          name: "George",
-          bio: "is a carpenter",
-          bioVisible: true
-        },
-        {
-          name: "Fred",
-          bio: "is a fish",
-          bioVisible: true
-        }
-      ],
+      people: [],
       newPerson: {name: "", bio: "", bioVisible: true}
     };
   },
-  created: function() {},
+  created: function() {
+    axios.get("/people").then(function(response) {
+      this.people = response.data;
+    }.bind(this));
+  },
   methods: {
     addPerson: function() {
       console.log("adding a person");
