@@ -52,6 +52,23 @@ var HomePage = {
     },
     setSortAttribute: function(inputAttribute) {
       this.sortAsc = !this.sortAsc;
+    },
+    setMarker: function(thePlace, theMap) {
+      var contentString = thePlace.description;
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      var marker = new google.maps.Marker({
+        position: {lat: thePlace.latitude, lng: thePlace.longitude},
+        map: theMap,
+        title: 'Uluru (Ayers Rock)'
+      });
+
+      marker.addListener('click', function() {
+        infowindow.open(theMap, marker);
+      });
     }
   },
   computed: {
@@ -68,51 +85,20 @@ var HomePage = {
     }
   },
   mounted: function() {
-    var uluru = {lat: -22.363, lng: 144.044};
+    var uluru = {lat: -5.363, lng: 31.044};
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 4,
       center: uluru
     });
-    var contentString = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-      '<div id="bodyContent">'+
-      '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-      'sandstone rock formation in the southern part of the '+
-      'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-      'south west of the nearest large town, Alice Springs; 450&#160;km '+
-      '(280&#160;mi) by road.</p>'+
-      '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-      'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-      '(last visited June 22, 2009).</p>'+
-      '</div>'+
-      '</div>';
-
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-
-    var marker = new google.maps.Marker({
-      position: uluru,
-      map: map,
-      title: 'Uluru (Ayers Rock)'
-    });
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
 
     var places = [
-      {lat: -60.363, lng: 38.044, description: "place1"},
-      {lat: 98.363, lng: -144.044, description: "place2"},
-      {lat: -20.363, lng: 140.044, description: "place3"}
+      {latitude: 33.3, longitude: 44.4, description: "somethingsomething"},
+      {latitude: 80.3, longitude: -44.4, description: "second marker"},
+      {latitude: -33.3, longitude: 144.4, description: "third marker"}
     ];
+
     for ( var i = 0; i < places.length; i++ ) {
-      var position = new google.maps.Marker({
-        position: places[i],
-        map: map,
-        title: 'Uluru (Ayers Rock)'
-      });
+      this.setMarker(places[i], map);
     }
   }
 };
